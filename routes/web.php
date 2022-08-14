@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('refund_request', [\App\Http\Controllers\BankController::class, 'refund_request']);
 Route::get('status_request', [\App\Http\Controllers\BankController::class, 'status_request']);
 Route::get('inter', [\App\Http\Controllers\BankController::class, 'inter']);
+Route::post('mobility/transfer_doc', [\App\Http\Controllers\BankController::class, 'transfer_doc']);
+Route::get('test', [\App\Http\Controllers\BankController::class, 'test']);
