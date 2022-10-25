@@ -18,3 +18,4 @@ Route::get('status_request', [\App\Http\Controllers\BankController::class, 'stat
 Route::get('inter', [\App\Http\Controllers\BankController::class, 'inter']);
 Route::post('mobility/transfer_doc', [\App\Http\Controllers\BankController::class, 'transfer_doc']);
 Route::get('test', [\App\Http\Controllers\BankController::class, 'test']);
+Route::get('status', [\App\Http\Controllers\BankController::class, 'status']);

@@ -179,4 +179,12 @@ class BankController extends Controller
             "files_cheques" => $list_img_cheqs
         ];
     }
+
+    /**
+     * @return string
+     */
+    public function status(): string
+    {
+        return 'OK';
+    }
 }
