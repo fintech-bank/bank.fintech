@@ -106,6 +106,24 @@ class BankController extends Controller
         ];
     }
 
+    public function creditor_doc()
+    {
+        $faker = Factory::create('fr_FR');
+        $creditors = collect();
+
+        for ($i=0; $i <= rand(0,3); $i++) {
+            $lists = ['EDF', "GRDF", "ENGIE", "SECU", "CAF", "Free", "Orange", "Sfr", "Bouygue Télécom"];
+            $creditors->push([
+                'creditor' => $lists[rand(0,8)],
+                'mandate_prlv' => generateReference(15),
+                'amount' => $faker->randomFloat(2, 1,1000),
+                'days' => rand(1,30)
+            ]);
+        }
+
+        return ['creditors' => $creditors->toArray()];
+    }
+
     /**
      * @return string
      */
