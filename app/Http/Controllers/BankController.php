@@ -18,11 +18,10 @@ class BankController extends Controller
         $faker = Factory::create('fr_FR');
         $chq = [
             "number" => random_numeric(6),
-            "amount" => $faker->boolean(25) ? - $faker->randomFloat(2, 5, 10000) : $faker->randomFloat(2, 5, 10000),
+            "amount" => $faker->boolean(25) ? -$faker->randomFloat(2, 5, 10000) : $faker->randomFloat(2, 5, 10000),
             "date_enc" => $faker->dateTimeBetween('-13 month', '-2 days'),
             "creditor" => $faker->boolean(35) ? $faker->name : $faker->company
         ];
-
 
 
         try {
@@ -30,7 +29,7 @@ class BankController extends Controller
                 'chq' => $chq,
                 'agence' => null,
                 'customer' => null,
-                'title' => "Cheque N°".$chq['number']
+                'title' => "Cheque N°" . $chq['number']
             ]);
 
             $pdf->setOptions([
@@ -44,7 +43,7 @@ class BankController extends Controller
                 'isRemoteEnabled' => true,
             ]);
             $pdf->stream();
-        }catch (Exception $exception ) {
+        } catch (Exception $exception) {
             dd($exception->getMessage());
         }
     }
@@ -88,15 +87,15 @@ class BankController extends Controller
         $mvms = collect();
         $account = collect(["number" => random_numeric(9), "solde" => $faker->randomFloat(2, -1000)]);
 
-        for ($i=0; $i <= rand(0,15); $i++) {
+        for ($i = 0; $i <= rand(0, 15); $i++) {
             $type_mvm = ['virement', 'prlv'];
             $mvms->push([
                 'uuid' => Str::uuid(),
-                'type_mvm' => $type_mvm[rand(0,1)],
+                'type_mvm' => $type_mvm[rand(0, 1)],
                 'reference' => generateReference(),
                 'creditor' => $faker->company,
                 'amount' => $faker->randomFloat(2, 10, 1200),
-                'date_transfer' => now()->addDays(rand(0,10))
+                'date_transfer' => now()->addDays(rand(0, 10))
             ]);
         }
 
@@ -111,17 +110,27 @@ class BankController extends Controller
         $faker = Factory::create('fr_FR');
         $creditors = collect();
 
-        for ($i=0; $i <= rand(1,3); $i++) {
+        for ($i = 0; $i <= rand(1, 3); $i++) {
             $lists = ['EDF', "GRDF", "ENGIE", "SECU", "CAF", "Free", "Orange", "Sfr", "Bouygue Télécom"];
+            $creditor = $lists[rand(0, 8)];
             $creditors->push([
-                'creditor' => $lists[rand(0,8)],
+                'creditor' => $creditor,
                 'mandate_prlv' => generateReference(15),
-                'amount' => $faker->randomFloat(2, 1,1000),
-                'days' => rand(1,30)
+                'amount' => $this->getAmountCreditor($faker, $creditor),
+                'days' => rand(1, 30)
             ]);
         }
 
         return ['creditors' => $creditors->toArray()];
+    }
+
+    private function getAmountCreditor($faker, $creditor)
+    {
+        return match ($creditor) {
+            "EDF", "GRDF", "ENGIE" => $faker->randomFloat(2, 20,90),
+            "SECU", "CAF" => $faker->randomFloat(2, 1,1000),
+            default => $faker->randomFloat(2,9,100),
+        };
     }
 
     /**
