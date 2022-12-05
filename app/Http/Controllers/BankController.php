@@ -101,8 +101,8 @@ class BankController extends Controller
         }
 
         return [
-            'mvms' => $mvms->toJson(),
-            'account' => $account->toJson()
+            'mvms' => $mvms->toArray(),
+            'account' => $account->toArray()
         ];
     }
 
