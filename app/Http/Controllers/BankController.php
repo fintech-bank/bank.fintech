@@ -80,11 +80,11 @@ class BankController extends Controller
 
     /**
      * @param Request $request
-     * Dans la requète il faut (Customer, Agence, num_mandate)
      * @return array[]
      */
     public function transfer_doc(Request $request)
     {
+        time_sleep_until(now()->addMinutes(rand(1,60))->timestamp);
         $faker = Factory::create('fr_FR');
         $mvms = collect();
         $account = collect(["number" => random_numeric(9), "solde" => $faker->randomFloat(2, -1000)]);

@@ -17,5 +17,6 @@ Route::get('refund_request', [\App\Http\Controllers\BankController::class, 'refu
 Route::get('status_request', [\App\Http\Controllers\BankController::class, 'status_request']);
 Route::get('inter', [\App\Http\Controllers\BankController::class, 'inter']);
 Route::post('mobility/transfer_doc', [\App\Http\Controllers\BankController::class, 'transfer_doc']);
+Route::post('mobility/creditor_doc', [\App\Http\Controllers\BankController::class, 'creditor_doc']);
 Route::get('test', [\App\Http\Controllers\BankController::class, 'test']);
 Route::get('status', [\App\Http\Controllers\BankController::class, 'status']);
