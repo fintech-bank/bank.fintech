@@ -84,7 +84,6 @@ class BankController extends Controller
      */
     public function transfer_doc(Request $request)
     {
-        sleep(10);
         $faker = Factory::create('fr_FR');
         $mvms = collect();
         $account = collect(["number" => random_numeric(9), "solde" => $faker->randomFloat(2, -1000)]);
@@ -97,6 +96,7 @@ class BankController extends Controller
                 'reference' => generateReference(),
                 'creditor' => $faker->company,
                 'amount' => $faker->randomFloat(2, 10, 1200),
+                'date_transfer' => now()->addDays(rand(0,10))
             ]);
         }
 
