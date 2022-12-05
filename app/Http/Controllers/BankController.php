@@ -111,7 +111,7 @@ class BankController extends Controller
         $faker = Factory::create('fr_FR');
         $creditors = collect();
 
-        for ($i=0; $i <= rand(0,3); $i++) {
+        for ($i=0; $i <= rand(1,3); $i++) {
             $lists = ['EDF', "GRDF", "ENGIE", "SECU", "CAF", "Free", "Orange", "Sfr", "Bouygue Télécom"];
             $creditors->push([
                 'creditor' => $lists[rand(0,8)],
