@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Str;
+
 if (! function_exists('random_numeric')) {
     function random_numeric($len = 10)
     {
@@ -17,5 +20,12 @@ if (! function_exists('eur')) {
     function eur($value): string
     {
         return number_format(floatval($value), 2, ',', ' ').' €';
+    }
+}
+
+if (!function_exists('generateReference')) {
+    function generateReference($length = 8)
+    {
+        return Str::upper(Str::random($length));
     }
 }
